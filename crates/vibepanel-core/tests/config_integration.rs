@@ -64,6 +64,14 @@ fn test_widget_names() {
         left_names.iter().any(|n| n.contains("window_title")),
         "Expected window_title widget in left"
     );
+    assert!(
+        left_names.iter().any(|n| n.contains("asus_control")),
+        "Expected private asus_control widget in left"
+    );
+    assert!(
+        left_names.iter().any(|n| n.contains("vpn_control")),
+        "Expected private vpn_control widget in left"
+    );
 
     assert!(
         right_names.iter().any(|n| n.contains("clock")),

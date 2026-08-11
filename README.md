@@ -57,6 +57,8 @@ https://github.com/user-attachments/assets/fba27921-0886-4e7b-850d-b51341583693
 - **Notifications** - notification center with Do Not Disturb
 - **Updates** - package update indicator (dnf, pacman/paru and flatpak support)
 - **CPU, Memory, GPU & Network Speed** - system resource monitors (AMD and NVIDIA GPU support)
+- **ASUS Control** - fan-profile and Integrated/Hybrid graphics controls
+- **VPN Control** - direct systemd controls for WireGuard and sing-box services
 - **Media** - MPRIS media player controls with album art
 - **Custom** - user-defined widgets (scripts, buttons, indicators)
 - **Taskbar** - open windows as clickable buttons

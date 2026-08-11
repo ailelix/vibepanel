@@ -182,6 +182,30 @@ pub mod card {
     pub const QS: &str = "qs-card";
 }
 
+/// Compact hardware and service control panel classes.
+pub mod control {
+    /// Shared control popover (`.control-panel`).
+    pub const PANEL: &str = "control-panel";
+
+    /// ASUS control popover (`.asus-control-popover`).
+    pub const ASUS_PANEL: &str = "asus-control-popover";
+
+    /// VPN control popover (`.vpn-control-popover`).
+    pub const VPN_PANEL: &str = "vpn-control-popover";
+
+    /// Homogeneous action row (`.control-panel-row`).
+    pub const ROW: &str = "control-panel-row";
+
+    /// Action button (`.control-panel-button`).
+    pub const BUTTON: &str = "control-panel-button";
+
+    /// Action button icon (`.control-panel-button-icon`).
+    pub const BUTTON_ICON: &str = "control-panel-button-icon";
+
+    /// Action button label (`.control-panel-button-label`).
+    pub const BUTTON_LABEL: &str = "control-panel-button-label";
+}
+
 /// List row classes.
 pub mod row {
     /// Base row class (`.vp-row`).
@@ -515,6 +539,19 @@ pub mod widget {
     // Spacer
     /// Spacer widget (`.spacer`).
     pub const SPACER: &str = "spacer";
+
+    // Command-backed controls
+    /// ASUS control widget (`.asus-control`).
+    pub const ASUS_CONTROL: &str = "asus-control";
+
+    /// ASUS control icon (`.asus-control-icon`).
+    pub const ASUS_CONTROL_ICON: &str = "asus-control-icon";
+
+    /// VPN control widget (`.vpn-control`).
+    pub const VPN_CONTROL: &str = "vpn-control";
+
+    /// VPN control icon (`.vpn-control-icon`).
+    pub const VPN_CONTROL_ICON: &str = "vpn-control-icon";
 
     // Clock
     /// Clock widget (`.clock`).

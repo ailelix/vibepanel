@@ -19,7 +19,7 @@ background_opacity = 0.0 # 0.0 = transparent (islands), 1.0 = solid
 # outline = true         # Override theme.outline for the bar (omit = inherit)
 
 [widgets]
-left = ["workspaces", "window_title"]
+left = ["workspaces", "window_title", "asus_control", "vpn_control"]
 center = ["media"]
 right = [
   "tray",
@@ -69,6 +69,21 @@ background_opacity = 1.0
 #   [widgets.notifications]
 #   toast_position = "top-right"  # "top-left", "top-center", "top-right", "bottom-left", "bottom-center", "bottom-right"
 #
+# Personal hardware and service controls used by this fork.
+[widgets.asus_control]
+icon = "system-monitor-symbolic"
+asusctl_command = "asusctl"
+supergfxctl_command = "supergfxctl"
+niri_command = "niri"
+
+[widgets.vpn_control]
+icon = "network-vpn"
+wireguard_service = "wg-quick@wg-uk.service"
+sing_box_service = "sing-box.service"
+# Service changes use sudo -n; grant only the required units via NOPASSWD.
+sudo_command = "sudo"
+systemctl_command = "systemctl"
+
 # Custom widgets use the "custom-" prefix for user-defined buttons:
 #   right = ["custom-os", "tray", "clock"]
 #

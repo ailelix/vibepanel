@@ -13,11 +13,14 @@
 //! identity for per-widget styling (e.g., `[widgets.clock].background_color`).
 //! This class is also used to generate popover class names like `clock-popover`.
 
+mod asus_control;
+mod asus_control_popover;
 mod base;
 mod battery;
 mod battery_popover;
 mod calendar_popover;
 mod clock;
+mod control_panel;
 mod cpu;
 mod custom;
 mod gpu;
@@ -45,6 +48,8 @@ mod taskbar;
 mod tray;
 mod updates;
 mod updates_common;
+mod vpn_control;
+mod vpn_control_popover;
 mod weather;
 mod weather_popover;
 mod window_title;
@@ -54,6 +59,7 @@ pub mod css;
 
 pub mod quick_settings;
 
+pub use asus_control::{AsusControlConfig, AsusControlWidget};
 pub use base::BaseWidget;
 pub(crate) use base::{MenuHandle, RippleHandle, trigger_ripple_from_gesture};
 pub use battery::{BatteryConfig, BatteryWidget};
@@ -68,6 +74,7 @@ pub use spacer::{SpacerConfig, SpacerWidget};
 pub use taskbar::{TaskbarConfig, TaskbarWidget};
 pub use tray::{TrayConfig, TrayWidget};
 pub use updates::{UpdatesConfig, UpdatesWidget};
+pub use vpn_control::{VpnControlConfig, VpnControlWidget};
 pub use weather::{WeatherConfig, WeatherWidget};
 pub use window_title::{WindowTitleConfig, WindowTitleWidget};
 pub use workspaces::{WorkspacesConfig, WorkspacesWidget};
@@ -303,6 +310,20 @@ impl WidgetFactory {
                 let updates = UpdatesWidget::new(cfg);
                 let root = updates.widget().clone().upcast::<Widget>();
                 Some(BuiltWidget::new(root, updates))
+            }
+            "asus_control" => {
+                let cfg = AsusControlConfig::from_entry(entry);
+                let widget = AsusControlWidget::new(cfg);
+                let root = widget.widget().clone().upcast::<Widget>();
+                let edge_interaction = widget.edge_interaction();
+                Some(BuiltWidget::new(root, widget).with_edge_interaction(edge_interaction))
+            }
+            "vpn_control" => {
+                let cfg = VpnControlConfig::from_entry(entry);
+                let widget = VpnControlWidget::new(cfg);
+                let root = widget.widget().clone().upcast::<Widget>();
+                let edge_interaction = widget.edge_interaction();
+                Some(BuiltWidget::new(root, widget).with_edge_interaction(edge_interaction))
             }
             "weather" => {
                 let cfg = WeatherConfig::from_entry(entry);

@@ -35,6 +35,7 @@ pub mod callbacks;
 pub mod cava;
 pub mod compositor;
 pub mod config_manager;
+pub mod control;
 pub mod desktop_notification;
 pub mod gpu;
 pub mod icons;

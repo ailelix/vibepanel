@@ -22,3 +22,9 @@ target
 
 # Full Material Symbols font (downloaded on demand by scripts/subset-font.sh)
 assets/fonts/MaterialSymbolsRounded-full.ttf
+
+# Arch package build artifacts when makepkg is run from the repository root
+/src/
+/pkg/
+/vibepanel/
+/*.pkg.tar.*

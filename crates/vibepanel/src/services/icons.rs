@@ -1272,16 +1272,26 @@ pub fn get_app_icon_name(app_id: &str) -> String {
 /// # Returns
 /// The resolved icon name, or the fallback if no icon could be found.
 pub fn resolve_app_icon_name(app_id: &str, fallback: &str) -> String {
+    resolve_app_icon_name_with_lookup(app_id, fallback, |candidate| {
+        gtk4::gdk::Display::default().is_some_and(|display| {
+            let icon_theme = IconTheme::for_display(&display);
+            icon_theme.has_icon(candidate)
+        })
+    })
+}
+
+fn resolve_app_icon_name_with_lookup(
+    app_id: &str,
+    fallback: &str,
+    has_icon: impl FnOnce(&str) -> bool,
+) -> String {
     let icon_name = get_app_icon_name(app_id);
     if !icon_name.is_empty() {
         return icon_name;
     }
     // Try the app_id directly as an icon name (some apps use their name)
-    if let Some(display) = gtk4::gdk::Display::default() {
-        let icon_theme = IconTheme::for_display(&display);
-        if icon_theme.has_icon(app_id) {
-            return app_id.to_string();
-        }
+    if has_icon(app_id) {
+        return app_id.to_string();
     }
     fallback.to_string()
 }
@@ -2454,11 +2464,24 @@ mod tests {
     #[test]
     fn resolve_app_icon_name_falls_back_without_matching_icon() {
         assert_eq!(
-            resolve_app_icon_name(
+            resolve_app_icon_name_with_lookup(
                 "vibepanel-test-definitely-missing-application",
-                "audio-x-generic"
+                "audio-x-generic",
+                |_| false,
             ),
             "audio-x-generic"
+        );
+    }
+
+    #[test]
+    fn resolve_app_icon_name_uses_app_id_when_theme_contains_it() {
+        assert_eq!(
+            resolve_app_icon_name_with_lookup(
+                "vibepanel-test-definitely-missing-application",
+                "audio-x-generic",
+                |_| true,
+            ),
+            "vibepanel-test-definitely-missing-application"
         );
     }
 
